@@ -1,0 +1,44 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long int
+int get_size(ll num)
+{
+    int cnt=0;
+    while(num>0){
+        num/=10;
+        cnt++;
+    }
+    return cnt;
+}
+ll kara(ll x,ll y)
+{
+    int size=max(get_size(x),get_size(y));
+    
+    if (size==1) return x*y;
+    int n=(int) ceil(size/2.0);
+    ll p= pow(10,n);
+    ll a=(ll) floor(x/(double)p);
+    ll b=(ll) x%p;
+    ll c=(ll) floor(y/(double)p);
+    ll d=(ll) y%p;
+    ll ac=kara(a,c);
+  ll bd=kara(b,d);
+  ll e=kara(a+b,c+d)-ac-bd;
+  return (ll)(pow(10*1L ,2*n)*ac+pow(10*1L,n)*e+bd);
+}
+
+int main()
+{
+    ll x,y;cin>>x>>y;
+    cout<<kara(x,y)<<endl;
+    return 0;
+}
