@@ -10,6 +10,54 @@ Write your code in this editor and press "Run" button to compile and execute it.
 
 using namespace std;
 #define ll long long int
+
+int cros(int arr[],int u,int d,int mid)
+{
+    int sum=0;
+    int xx=0;
+    for(int i=mid+1;i<=u;i++){
+        sum+=arr[i];
+        if (sum>xx)xx=sum;
+    }
+    sum=0;
+    int yy=0;
+    for(int i=mid;i>=d;i--){
+        sum+=arr[i];
+        if (sum>yy)yy=sum;
+    }
+    return xx+yy;
+}
+
+int long_sub(int arr[],int d,int u)
+{
+    if (d==u)
+    {
+        
+        if (arr[d]>0)
+        return arr[d];
+        else
+        return 0;
+    }
+    int mid=(u+d)/2;
+    
+    
+    
+    
+    return max(max(long_sub(arr,d,mid),long_sub(arr,mid+1,u)),cros(arr,u,d,mid));
+}
+int main()
+{
+    int n;cin>>n;
+    int* a=new int[n];
+    for (int i=0;i<n;i++) cin>>a[i];
+    cout<<long_sub(a,0,n-1);
+}
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long int
 int get_size(ll num)
 {
     int cnt=0;
